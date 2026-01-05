@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #111;
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "NB International Pro", "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-serif {
+  font-family: "NB International Pro", "Inter", sans-serif;
+}
+
+.backdrop-overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at top right,
+    transparent 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  pointer-events: none;
+}
+
+section {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  will-change: transform, opacity;
+  pointer-events: none; /* Let events pass to the 3D Canvas */
+}
+
+/* Re-enable pointer events for all interactive content */
+.hero-content-wrapper,
+.service-card,
+.industry-block,
+.benefit-item,
+.team-node,
+.team-hierarchy-container,
+.navbar-container,
+button,
+a,
+input,
+textarea {
+  pointer-events: auto;
+}
+
+/* Initial states for reveal animations handled by GSAP */
+.service-card,
+.industry-block,
+.benefit-item,
+.team-node,
+.hero-content-wrapper {
+  will-change: transform, opacity;
+}
+
+.will-change-transform {
+  will-change: transform, opacity;
+}
