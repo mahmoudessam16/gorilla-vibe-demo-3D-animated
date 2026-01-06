@@ -307,8 +307,88 @@ function App() {
         });
       }
 
+      // --- MAAS BENEFITS PINNED GRID FORMATION ---
+      const maaSection = document.querySelector("#benefits");
+      if (maaSection) {
+        const headingArea = maaSection.querySelector(".maas-heading-area");
+        const cards = maaSection.querySelectorAll(".maas-card");
+        const cta = maaSection.querySelector(".maas-cta");
+
+        // Scattered positions: left, right, top, bottom-left, bottom-right
+        const gridPositions = [
+          { x: -1.5, y: -0.3 }, // Card 0: Far left, slightly up
+          { x: 0, y: -1 }, // Card 1: Center top
+          { x: 1.5, y: -0.3 }, // Card 2: Far right, slightly up
+          { x: -0.7, y: 1 }, // Card 3: Bottom left
+          { x: 0.7, y: 1 }, // Card 4: Bottom right
+        ];
+
+        const maasTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: maaSection,
+            start: "top top",
+            end: "+=400%",
+            pin: true,
+            scrub: 1.5,
+            pinSpacing: true,
+          },
+        });
+
+        // Stage 1: Heading visible initially (starts at opacity 1)
+        gsap.set(headingArea, { opacity: 1 });
+        gsap.set(cards, { opacity: 0 });
+        gsap.set(cta, { opacity: 0 });
+
+        // Stage 2: Fade out heading (20% of timeline)
+        maasTl.to(headingArea, {
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in",
+        });
+
+        // Stage 3: Cards scatter from center to grid positions
+        maasTl.add("cardsStart", 0.6); // Start cards after heading fades
+
+        cards.forEach((card, i) => {
+          const pos = gridPositions[i];
+
+          // Card dimensions (narrower cards)
+          const cardWidth = 300;
+          const cardHeight = 220;
+
+          // Calculate scattered position using multipliers
+          const finalX = pos.x * cardWidth;
+          const finalY = pos.y * cardHeight;
+
+          maasTl.to(
+            card,
+            {
+              opacity: 1,
+              left: "50%",
+              top: "50%",
+              x: finalX,
+              y: finalY,
+              duration: 1.5,
+              ease: "power3.out",
+            },
+            `cardsStart+=${i * 0.1}` // Stagger each card
+          );
+        });
+
+        // Stage 4: CTA appears
+        maasTl.to(
+          cta,
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.5"
+        );
+      }
+
       // --- REMAINING REVEALS ---
-      const revealSections = gsap.utils.toArray(["#benefits", "#team"]);
+      const revealSections = gsap.utils.toArray(["#team"]);
       revealSections.forEach((section) => {
         const words = section.querySelectorAll(".split-title span");
         const contents = section.querySelectorAll(
