@@ -1,26 +1,21 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import PremiumButton from "./PremiumButton";
 
 const benefits = [
   {
     title: "SMART Goal-Oriented Services",
-    color: "bg-[#1e3a8a]",
   },
   {
     title: "Subscriptions-Based",
-    color: "bg-[#0891b2]",
   },
   {
     title: "Flexible, Scalable, and Agile Frameworks",
-    color: "bg-[#0d9488]",
   },
   {
     title: "Access to a Top Tier Cross-Functional Team",
-    color: "bg-[#4f46e5]",
   },
   {
     title: "Reduced Operational Costs",
-    color: "bg-[#0284c7]",
   },
 ];
 
@@ -65,14 +60,12 @@ const MaaSBenefits = () => {
                   transform: "translate(-50%, -50%)",
                 }}
               >
-                <div
-                  className={`h-auto p-8 md:p-10 lg:p-12 ${benefit.color} shadow-2xl flex flex-col gap-6 md:gap-8 w-[280px] md:w-[300px]`}
-                >
-                  <div className="text-black/10 text-3xl md:text-4xl font-black italic tracking-tighter select-none">
+                <div className="h-auto p-8 md:p-10 lg:p-12 bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl flex flex-col gap-6 md:gap-8 w-[280px] md:w-[300px] hover:bg-white/15 transition-all duration-500">
+                  <div className="text-white/20 text-3xl md:text-4xl font-black italic tracking-tighter select-none font-['Space_Grotesk']">
                     0{i + 1}
                   </div>
                   <div className="flex flex-col gap-3 md:gap-4">
-                    <h3 className="text-lg md:text-xl font-black text-black/90 uppercase tracking-tighter leading-tight">
+                    <h3 className="text-lg md:text-xl font-bold text-white uppercase tracking-tight leading-tight font-['Inter']">
                       {benefit.title}
                     </h3>
                   </div>
@@ -83,7 +76,7 @@ const MaaSBenefits = () => {
         </div>
 
         {/* CTA - Will appear at the end */}
-        <div className="maas-cta absolute bottom-20 left-1/2 -translate-x-1/2 opacity-0">
+        <div className="maas-cta absolute bottom-10 left-1/2 -translate-x-1/2 opacity-0">
           <PremiumButton variant="primary" className="px-16 md:px-24">
             Explore Our Plans
           </PremiumButton>

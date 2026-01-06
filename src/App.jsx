@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import Services from "./components/Services";
 import Industries from "./components/Industries";
 import MaaSBenefits from "./components/MaaSBenefits";
+import Storytelling from "./components/Storytelling";
 import Team from "./components/Team";
 
 import gsap from "gsap";
@@ -316,11 +317,11 @@ function App() {
 
         // Scattered positions: left, right, top, bottom-left, bottom-right
         const gridPositions = [
-          { x: -1.5, y: -0.3 }, // Card 0: Far left, slightly up
+          { x: -1.6, y: -0.6 }, // Card 0: Far left, slightly up
           { x: 0, y: -1 }, // Card 1: Center top
-          { x: 1.5, y: -0.3 }, // Card 2: Far right, slightly up
-          { x: -0.7, y: 1 }, // Card 3: Bottom left
-          { x: 0.7, y: 1 }, // Card 4: Bottom right
+          { x: 1.6, y: -0.6 }, // Card 2: Far right, slightly up
+          { x: -0.6, y: 0 }, // Card 3: Bottom left
+          { x: 0.6, y: 0 }, // Card 4: Bottom right
         ];
 
         const maasTl = gsap.timeline({
@@ -387,6 +388,63 @@ function App() {
         );
       }
 
+      // --- BRAND STORYTELLING PINNED PROGRESSION ---
+      const storySection = document.querySelector("#storytelling");
+      if (storySection) {
+        const label = storySection.querySelector(".story-label");
+        const title = storySection.querySelector(".story-title");
+        const intro = storySection.querySelector(".story-intro");
+        const conceptBlocks = storySection.querySelectorAll(".concept-block");
+        const visuals = storySection.querySelectorAll(".visual-stage");
+
+        const storyTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: storySection,
+            start: "top top",
+            end: "+=300%",
+            pin: true,
+            scrub: 1,
+          },
+        });
+
+        // Step 1: Entry Animations
+        storyTl.to([label, title, intro], {
+          opacity: 1,
+          y: -20,
+          stagger: 0.1,
+          duration: 1,
+          ease: "power3.out",
+        });
+
+        // Step 2: Cycle through concepts
+        conceptBlocks.forEach((block, i) => {
+          // Show current
+          storyTl.to([block, visuals[i]], {
+            opacity: 1,
+            y: -10,
+            duration: 1,
+            ease: "power2.out",
+          });
+
+          // If not the last one, hide current before next
+          if (i < conceptBlocks.length - 1) {
+            storyTl.to(
+              [block, visuals[i]],
+              {
+                opacity: 0,
+                y: -20,
+                duration: 1,
+                ease: "power2.in",
+              },
+              "+=0.5" // Hold duration
+            );
+          } else {
+            // Stay visible at the end for final state
+            storyTl.to({}, { duration: 1 }); // Final hold
+          }
+        });
+      }
+
       // --- REMAINING REVEALS ---
       const revealSections = gsap.utils.toArray(["#team"]);
       revealSections.forEach((section) => {
@@ -446,6 +504,7 @@ function App() {
           <Services />
           <Industries />
           <MaaSBenefits />
+          <Storytelling />
           <Team />
         </main>
 

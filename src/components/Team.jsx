@@ -1,51 +1,78 @@
+import { useRef } from "react";
+
+const team = [
+  {
+    name: "Alex Vibe",
+    role: "Chief Executive Officer",
+    image: "/team-pic-1.jpg", // You'll need to add these images
+  },
+  {
+    name: "Mahmoud Essam",
+    role: "Strategy Director",
+    image: "/team-pic-1.jpg",
+  },
+  {
+    name: "Ahmed Mohamed",
+    role: "Creative Lead",
+    image: "/team-pic-4.jpg",
+  },
+  {
+    name: "Mohamed Elsayed",
+    role: "Tech Architect",
+    image: "/team-pic-4.jpg",
+  },
+];
+
 const Team = () => {
-  const team = [
-    { name: "Mahmoud Essam", role: "Chief Architect", id: "01" },
-    { name: "Mahmoud Essam", role: "Strategy Lead", id: "02" },
-    { name: "Mahmoud Essam", role: "Creative Director", id: "03" },
-  ];
+  const sectionRef = useRef(null);
 
   return (
     <section
+      ref={sectionRef}
       id="team"
-      className="relative z-10 w-full min-h-screen py-32 bg-transparent flex flex-col items-center justify-center overflow-hidden"
+      className="relative z-10 w-full h-auto min-h-fit py-32 bg-transparent flex flex-col items-center justify-center"
     >
       <div className="max-w-7xl w-full mx-auto px-6 md:px-12">
-        <div className="max-w-3xl mb-24">
-          <span className="text-blue-500 text-xs font-black tracking-[0.4em] uppercase mb-4 block">
-            The Crew // 04
+        {/* Section Header */}
+        <div className="max-w-3xl mb-20 text-center mx-auto">
+          <span className="team-label text-blue-500 text-[10px] md:text-xs font-black tracking-[0.5em] uppercase mb-4 block">
+            Elite Operators // 04
           </span>
-          <h2 className="split-title text-4xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-6">
-            Elite Operators
+          <h2 className="split-title text-4xl md:text-6xl lg:text-7xl font-black text-white leading-tight uppercase tracking-tighter mb-6">
+            Leading Brands Out of the Woods
           </h2>
-          <p className="content-p text-white/40 text-sm md:text-base font-medium max-w-xl leading-relaxed">
-            A specialized unit of digital architects dedicated to one single
-            objective: Your brand's absolute market dominance.
+          <p className="content-p text-white/40 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
+            A specialized unit of digital strategists, creatives, and architects
+            dedicated to delivering absolute market dominance.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-1px bg-white/5 border border-white/5">
+        {/* Team Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {team.map((member, i) => (
-            <div
-              key={i}
-              className="team-node flex flex-col gap-6 p-12 bg-black/20 backdrop-blur-xl hover:bg-blue-600/10 transition-all duration-500 group relative overflow-hidden"
-            >
-              <div className="absolute top-0 left-0 w-full h-[2px] bg-blue-600 -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
-
-              <span className="text-blue-500/30 text-6xl font-black italic tracking-tighter select-none">
-                {member.id}
-              </span>
-
-              <div className="flex flex-col gap-2">
-                <h3 className="text-3xl font-black text-white uppercase tracking-tighter group-hover:text-blue-500 transition-colors">
-                  {member.name}
-                </h3>
-                <span className="text-white/20 text-[10px] uppercase tracking-[0.4em] font-black">
-                  {member.role}
-                </span>
+            <div key={i} className="team-node group flex flex-col items-center">
+              {/* Image Container with Glassmorphism Background */}
+              <div className="relative w-full aspect-[4/5] mb-6 overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-lg hover:border-blue-400/40 transition-all duration-500">
+                {/* Placeholder for transparent team image */}
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover object-center opacity-20 hover:opacity-100 hover:scale-110 transition-all duration-500"
+                />
               </div>
 
-              <div className="mt-8 h-[1px] w-12 bg-white/10 group-hover:w-full group-hover:bg-blue-500/20 transition-all duration-700"></div>
+              {/* Member Info */}
+              <div className="text-center">
+                <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight leading-none mb-2 group-hover:text-blue-500 transition-colors duration-300">
+                  {member.name}
+                </h3>
+                <p className="text-white/40 text-xs md:text-sm font-medium uppercase tracking-wider">
+                  {member.role}
+                </p>
+              </div>
+
+              {/* Accent Line */}
+              <div className="mt-4 h-[2px] w-12 bg-white/10 group-hover:w-full group-hover:bg-blue-500/40 transition-all duration-500"></div>
             </div>
           ))}
         </div>
