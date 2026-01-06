@@ -1,8 +1,8 @@
 const Team = () => {
   const team = [
-    { name: "Alex Vibe", role: "Chief Architect", id: "01" },
-    { name: "Sarah Orbit", role: "Strategy Lead", id: "02" },
-    { name: "Marcus Prime", role: "Creative Director", id: "03" },
+    { name: "Mahmoud Essam", role: "Chief Architect", id: "01" },
+    { name: "Mahmoud Essam", role: "Strategy Lead", id: "02" },
+    { name: "Mahmoud Essam", role: "Creative Director", id: "03" },
   ];
 
   return (
